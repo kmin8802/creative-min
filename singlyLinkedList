@@ -1,0 +1,44 @@
+class Node:
+    def __init__(self, data, next= None):
+        self.data = data;
+        self.next = next;
+
+class LListMng:
+    data = None;
+    head = None;
+        
+    def __init__(self, node):
+        self.head = node;
+        self.data = self.head;
+        
+    def add(self, data):
+        if self.head == None :
+            self.head = data;
+        else :
+            temp = self.data;
+            temp.next = data;
+            self.data = temp.next;
+            
+    def printData(self):
+        node = self.head;
+        cnt = 0;
+        while node:
+            cnt = cnt+1;
+            print(cnt, " : ", node.data);
+            node = node.next
+            
+            
+testNode = Node(1);
+# 초기화
+testList = LListMng(testNode);
+
+# add
+testList.add(Node(2));
+testList.add(Node(3));
+testList.add(Node(4));
+testList.add(Node(5));
+testList.add(Node(5));
+testList.add(Node(5));
+
+# 출력부분
+testList.printData();      
