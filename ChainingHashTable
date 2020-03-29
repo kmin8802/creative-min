@@ -1,0 +1,68 @@
+import DlListMng
+
+# SimpleHashTable 수정 size 10
+class ChainingHashTable :
+    tableSize = 10;
+    hTable = None;
+    
+    # 초기화
+    def __init__(self) :
+        self.hTable = list([None for i in range(self.tableSize)]);
+        print("<Init info> hTable  ",self.hTable);
+    
+    # 해쉬함수
+    def hashFunc(self, key) :
+        # print("key : ", key);
+        return key%5;
+    
+    # 데이터 세팅
+    def setData(self, key, value) :
+        # int 형태가 아니면 return
+        if(str(type(key)) != "<class 'int'>"):
+            print("Only input int data!");
+            return;
+        
+        targAddr = self.hashFunc(key);
+        inputDataNode = DlListMng.Node(value);
+        
+        if self.hTable[targAddr] == None :
+            self.hTable[targAddr] = DlListMng.DlListMng(inputDataNode);
+        else :
+            #print("test", self.hTable[targAddr]);
+            self.hTable[targAddr].add(inputDataNode);
+    
+    # 데이터 출력 및 꺼냄
+    def getData(self, addr) :
+        hashTableAddrData = self.hTable[self.hashFunc(addr)];
+        printData = "";
+        returnData = None;
+        
+        if hashTableAddrData == None :
+            printData = "";
+            
+        else :
+            returnData = hashTableAddrData.cur.data;
+            printData = returnData;
+            
+        print("data : ", printData);
+        return returnData;
+    
+    # 테이블 전체 출력 (리스트형태로 출력되도록 수정 필요)
+    def descHashTable(self) : 
+        targTable = self.hTable;
+        for i in range(self.tableSize):
+            #print("i :", i);
+            printData = "";
+            if targTable[i] != None :
+                printData = targTable[i];
+                
+            print("addr", i, ":", printData);
+# TEST    
+test = ChainingHashTable();
+
+test.setData(1, "Tes111");
+test.setData(51, "Tes1113");
+test.setData(22, "222");
+test.getData(1);
+test.getData(22);
+test.descHashTable();
