@@ -1,0 +1,26 @@
+# 동적계획 Dynamic Programming
+# 피보나치
+
+def dynamicPrg(tableSize) :
+    numList = list([None for i in range(tableSize)]);
+    # print("numList:", numList);
+    for i in range(tableSize):
+        retNum = 0;
+        curNum = i+1;
+        
+        if(i == 0 or i == 1) :
+            retNum = curNum;
+        else :
+            retNum = continuousSumFunc(numList[i-2], numList[i-1]);
+        
+        numList[i] = retNum;
+        
+        
+    print(numList);
+    return numList;
+    
+def continuousSumFunc(prevNum, curNum) :
+    return prevNum + curNum;
+    
+#test
+dynamicPrg(10);
